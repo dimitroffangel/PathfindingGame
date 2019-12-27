@@ -22,7 +22,8 @@
 
 const char OBSTACLE_SYMBOL = '#';
 
-enum Direction {
+enum Direction 
+{
 	directionNone = 0,
 	directionUp = 1 << 0,
 	directionDown = 1 << 1,
@@ -36,60 +37,8 @@ struct Position
 	Direction direction = directionNone;
 };
 
-Direction GetReversedDirection(Direction direction)
-{
-	if (direction == directionUp)
-	{
-		return directionDown;
-	}
+bool operator==(const Position& a, const Position& b);
 
-	if (direction == directionDown)
-	{
-		return directionUp;
-	}
+Direction GetReversedDirection(Direction direction);
 
-	if (direction == directionLeft)
-	{
-		return directionRight;
-	}
-
-	if (direction == directionRight)
-	{
-		return directionLeft;
-	}
-
-	return direction;
-}
-
-bool MovePosition(Position& position, Direction direction)
-{
-	if (direction == directionNone)
-	{
-		std::cout << "MovePosition():: direction was none..." << '\n';
-		return false;
-	}
-
-	if (direction == directionUp)
-	{
-		position.y -= 1;
-		return true;
-	}
-
-	else if (direction == directionRight)
-	{
-		position.x += 1;
-		return true;
-	}
-
-	else if (direction == directionDown)
-	{
-		position.y += 1;
-		return true;
-	}
-
-	else if (direction == directionLeft)
-	{
-		position.x -= 1;
-		return true;
-	}
-}
+bool MovePosition(Position& position, Direction direction);

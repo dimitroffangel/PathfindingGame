@@ -5,27 +5,35 @@
 #include <vector>
 #include <string>
 
+bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std::vector<std::string>* pointerToMap, const Position& position);
+
+
 class Mage
 {
 private:
+	const std::vector<std::string>* m_Map;
 	Position m_Position;
 	std::stack<Position> m_AvailableRoutes;
 	std::vector<Position> m_IteratedPosition;
-	Direction m_Direction;
-	const std::vector<std::string>* m_Map;
+	Direction m_Direction = directionDown;
+	bool m_IsTeleportingBack = false;
 
+public:
+	bool m_CanMove = true;
+
+public:
 	Mage(const std::vector<std::string>* map)
-		:m_Map(map), m_Direction(directionDown)
+		:m_Map(map)
 	{
-		if (IsPositionReusable(map, m_Position))
+		m_Position.direction = m_Direction;
+		m_IteratedPosition.push_back(m_Position);
+
+		if (IsPositionReusable(m_IteratedPosition, m_Map, m_Position))
 		{
 			m_AvailableRoutes.push(m_Position);
 		}
-
 	}
 
 public:
 	void TryMoving();
 };
-
-bool IsPositionReusable(const std::vector<std::string>* pointerToMap, const Position& position);
