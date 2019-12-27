@@ -12,7 +12,7 @@ bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std
 class Mage
 {
 private:
-	const std::vector<std::string>* m_Map;
+	std::vector<std::string>* m_Map;
 	Position m_Position;
 	std::stack<Position> m_AvailableRoutes;
 	std::vector<Position> m_IteratedPosition;
@@ -23,7 +23,7 @@ public:
 	bool m_CanMove = true;
 
 public:
-	Mage(const std::vector<std::string>* map)
+	Mage(std::vector<std::string>* map)
 		:m_Map(map)
 	{
 		m_Position.direction = m_Direction;

@@ -6,11 +6,13 @@ void Mage::TryMoving()
 {
 	bool hasMoved = false;
 
-	const std::vector<std::string>& map = *m_Map;
+	std::vector<std::string>& map = *m_Map;
 	
 	const bool canTeleport = m_IsTeleportingBack;
 	const Direction currentDirection = m_Direction;
 	Position newPosition = m_Position;
+
+	map[m_Position.x][m_Position.y] = '.';
 	
 	if ((m_Direction == directionUp || m_IsTeleportingBack) && m_Position.y - 1 >= 0 && map[m_Position.y - 1][m_Position.x] != OBSTACLE_SYMBOL)
 	{
@@ -97,6 +99,8 @@ void Mage::TryMoving()
 	}
 
 	m_Position = newPosition;
+
+	map[m_Position.x][m_Position.y] = 'P';
 
 	if (m_Position.x == map[0].size() - 1 && m_Position.y == map.size() - 1)
 	{
