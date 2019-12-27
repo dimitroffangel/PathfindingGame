@@ -29,8 +29,20 @@ int main()
 	std::vector<Enemy> enemies = GenerateEnemies(map, numberOfElements);
 	Mage mage(&map);
 	
+	int numberOfPlayerPlacedObstacles;
+	const int numberOfPassablePositions = GetNumberOfPassableObjectsOnMap(map);
+
+	std::cout << "Enter the number of obstacles you want to add into the level..." << '\n';
+
+	do
+	{
+		std::cin >> numberOfPlayerPlacedObstacles;
+	} 
+	while (numberOfPlayerPlacedObstacles < 0 || numberOfPlayerPlacedObstacles >= numberOfPassablePositions - 2);
+
 	while (mage.m_CanMove && !IsPlayerCollidingWithEnemies(mage.GetPosition(), enemies))
 	{
+		
 		MoveEnemies(enemies);
 		mage.TryMoving();
 	}

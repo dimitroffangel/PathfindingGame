@@ -74,3 +74,21 @@ bool IsEntityCollidingWithObstacle(const std::vector<std::string>& map, const Po
 {
 	return map[position.x][position.y] == FREE_POSITION_SYMBOL;
 }
+
+int GetNumberOfPassableObjectsOnMap(const std::vector<std::string>& map)
+{
+	int numberOfPassableObjectsOnMao = 0;
+
+	for (const auto& row : map)
+	{
+		for (const auto& symbolOnCol : row)
+		{
+			if (symbolOnCol == FREE_POSITION_SYMBOL)
+			{
+				numberOfPassableObjectsOnMao++;
+			}
+		}
+	}
+
+	return numberOfPassableObjectsOnMao;
+}
