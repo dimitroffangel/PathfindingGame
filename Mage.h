@@ -1,4 +1,6 @@
-#pragma once
+#ifndef MAGE_H_GUARD
+#define MAGE_H_GUARD
+
 #include "EnitityComponent.h"
 
 #include <stack>
@@ -6,7 +8,6 @@
 #include <string>
 
 bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std::vector<std::string>* pointerToMap, const Position& position);
-
 
 class Mage
 {
@@ -37,3 +38,5 @@ public:
 public:
 	void TryMoving();
 };
+
+#endif

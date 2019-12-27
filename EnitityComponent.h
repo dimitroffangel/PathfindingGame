@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ENTITYCOMPONENT_H_GUARD
+#define ENTITYCOMPONENT_H_GUARD
 
 #include <iostream>
 
@@ -42,3 +43,5 @@ bool operator==(const Position& a, const Position& b);
 Direction GetReversedDirection(Direction direction);
 
 bool MovePosition(Position& position, Direction direction);
+
+#endif
