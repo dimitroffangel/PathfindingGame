@@ -24,14 +24,16 @@ int main()
 		"##......"
 	};
 
+	const size_t numberOfElements = 4;
 
+	std::vector<Enemy> enemies = GenerateEnemies(map, numberOfElements);
 	Mage mage(&map);
-
+	
 	while (mage.m_CanMove)
 	{
+		MoveEnemies(enemies);
 		mage.TryMoving();
 	}
-
 
 	return 0;
 }

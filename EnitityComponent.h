@@ -2,6 +2,7 @@
 #define ENTITYCOMPONENT_H_GUARD
 
 #include <iostream>
+#include <random>
 
 //#include<vector>
 //
@@ -22,6 +23,8 @@
 //};
 
 const char OBSTACLE_SYMBOL = '#';
+const char FREE_POSITION_SYMBOL = '.';
+const char ENEMY_SYMBOL = 'E';
 
 enum Direction 
 {
@@ -43,5 +46,9 @@ bool operator==(const Position& a, const Position& b);
 Direction GetReversedDirection(Direction direction);
 
 bool MovePosition(Position& position, Direction direction);
+
+int GenerateNumber(std::mt19937& generator, const int fromSize, const int toSize);
+
+bool EntityCollidesWithObstacle(const std::vector<std::string>& map, const Position& position);
 
 #endif

@@ -62,3 +62,15 @@ bool MovePosition(Position& position, Direction direction)
 		return true;
 	}
 }
+
+int GenerateNumber(std::mt19937& generator, const int fromSize, const int toSize)
+{
+	std::uniform_int_distribution<int> randomIntegerGenerator(fromSize, toSize);
+
+	return randomIntegerGenerator(generator);
+}
+
+bool EntityCollidesWithObstacle(const std::vector<std::string>& map, const Position& position)
+{
+	return map[position.x][position.y] == FREE_POSITION_SYMBOL;
+}
