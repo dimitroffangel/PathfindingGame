@@ -72,3 +72,19 @@ void MoveEnemies(std::vector<Enemy>& enemies)
 		enemy.Move();
 	}
 }
+
+bool IsPlayerCollidingWithEnemies(const Position& playerPosition, const std::vector<Enemy>& enemies)
+{
+	for (const auto& enemy : enemies)
+	{
+		const Position& enemyPosition = enemy.GetPosition();
+
+		if (playerPosition.x == enemyPosition.x && playerPosition.y == enemyPosition.y)
+		{
+			std::cout << "Player has collided with an enemy..." << '\n';
+			return true;
+		}
+	}
+
+	return false;
+}

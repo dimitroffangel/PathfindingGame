@@ -22,6 +22,11 @@ private:
 public:
 	bool m_CanMove = true;
 
+	const Position& GetPosition() const
+	{
+		return m_Position;
+	}
+
 public:
 	Mage(std::vector<std::string>* map)
 		:m_Map(map)
