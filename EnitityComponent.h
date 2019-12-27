@@ -49,6 +49,6 @@ bool MovePosition(Position& position, Direction direction);
 
 int GenerateNumber(std::mt19937& generator, const int fromSize, const int toSize);
 
-bool EntityCollidesWithObstacle(const std::vector<std::string>& map, const Position& position);
+bool IsEntityCollidingWithObstacle(const std::vector<std::string>& map, const Position& position);
 
 #endif

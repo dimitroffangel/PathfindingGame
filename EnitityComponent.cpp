@@ -70,7 +70,7 @@ int GenerateNumber(std::mt19937& generator, const int fromSize, const int toSize
 	return randomIntegerGenerator(generator);
 }
 
-bool EntityCollidesWithObstacle(const std::vector<std::string>& map, const Position& position)
+bool IsEntityCollidingWithObstacle(const std::vector<std::string>& map, const Position& position)
 {
 	return map[position.x][position.y] == FREE_POSITION_SYMBOL;
 }
