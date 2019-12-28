@@ -17,7 +17,6 @@ void Sourceress::Move()
 
 std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition()
 {
-	
 	const std::vector<std::string>& map = *m_Map;
 
 	const size_t mapNumberOfRows = map.size();
