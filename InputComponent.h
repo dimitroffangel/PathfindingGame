@@ -1,0 +1,6 @@
+#ifndef INPUTCOMPONENT_H_GUARD
+#define INPUTCOMPONENT_H_GUARD
+
+
+
+#endif

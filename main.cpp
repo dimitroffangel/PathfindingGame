@@ -29,13 +29,13 @@ int main()
 	Sourceress sourceress(map);
 
 
-	//const size_t numberOfElements = 1;
+	const size_t numberOfElements = 0;
 
-	//std::vector<Enemy> enemies = GenerateEnemies(map, numberOfElements);
-	//Mage mage(&map);
-	//
-	//int numberOfPlayerPlacedObstacles;
-	//const int numberOfPassablePositions = GetNumberOfPassableObjectsOnMap(map);
+	std::vector<Enemy> enemies = GenerateEnemies(map, numberOfElements);
+	Mage mage(&map);
+	
+	int numberOfPlayerPlacedObstacles;
+	const int numberOfPassablePositions = GetNumberOfPassableObjectsOnMap(map);
 
 	//std::cout << "Enter the number of obstacles you want to add into the level..." << '\n';
 
@@ -44,6 +44,12 @@ int main()
 	//	std::cin >> numberOfPlayerPlacedObstacles;
 	//} 
 	//while (numberOfPlayerPlacedObstacles < 0 || numberOfPlayerPlacedObstacles >= numberOfPassablePositions - 2);
+
+	while (sourceress.m_CanMove)
+	{
+		std::cout << "Moving..." << '\n';
+		sourceress.Move();
+	}
 
 	//while (mage.m_CanMove && !IsPlayerCollidingWithEnemies(mage.GetPosition(), enemies))
 	//{

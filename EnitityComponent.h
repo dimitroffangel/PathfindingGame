@@ -39,6 +39,11 @@ struct Position
 {
 	int x = 0, y = 0;
 	Direction direction = directionNone;
+
+	Position()
+	{
+
+	}
 };
 
 bool operator==(const Position& a, const Position& b);

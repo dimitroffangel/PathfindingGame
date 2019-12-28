@@ -2,8 +2,20 @@
 
 #include <vector>
 #include <queue>
+#include <unordered_map>
 
-std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition() const
+void Sourceress::Move()
+{
+	m_Position = m_ShortestWay.top();
+	m_ShortestWay.pop();
+
+	if (m_ShortestWay.size() == 0)
+	{
+		m_CanMove = false;
+	}
+}
+
+std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition()
 {
 	
 	const std::vector<std::string>& map = *m_Map;
@@ -12,9 +24,11 @@ std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition()
 	const size_t mapNumberOfCols = map[0].size();
 
 	std::vector<std::vector<int> > distanceForEveryReachablePosition(mapNumberOfRows);
+	std::vector<std::vector<Position>> reachedFrom(mapNumberOfRows);
 
 	for (size_t i = 0; i < mapNumberOfRows; i++)
 	{
+		reachedFrom[i].reserve(mapNumberOfCols);
 		distanceForEveryReachablePosition[i].reserve(mapNumberOfCols);
 	}
 
@@ -22,6 +36,8 @@ std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition()
 	{
 		for (size_t col = 0; col < mapNumberOfCols; col++)
 		{
+			reachedFrom[row].push_back(Position());
+
 			if (map[row][col] != OBSTACLE_SYMBOL)
 				distanceForEveryReachablePosition[row].push_back(mapNumberOfCols * mapNumberOfRows);
 
@@ -46,6 +62,7 @@ std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition()
 
 			distanceForEveryReachablePosition[newPositionToReach.y][newPositionToReach.x] = distanceForEveryReachablePosition[currentPosition.y][currentPosition.x] + 1;
 			positionToReach.push(newPositionToReach);
+			reachedFrom[newPositionToReach.y][newPositionToReach.x] = currentPosition;
 		}
 
 		if (currentPosition.x + 1 < map[0].size() && map[currentPosition.y][currentPosition.x + 1] != OBSTACLE_SYMBOL
@@ -56,6 +73,7 @@ std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition()
 
 			distanceForEveryReachablePosition[newPositionToReach.y][newPositionToReach.x] = distanceForEveryReachablePosition[currentPosition.y][currentPosition.x] + 1;
 			positionToReach.push(newPositionToReach);
+			reachedFrom[newPositionToReach.y][newPositionToReach.x] = currentPosition;
 		}
 
 		if (currentPosition.y + 1 < map.size() && map[currentPosition.y + 1][currentPosition.x] != OBSTACLE_SYMBOL
@@ -66,6 +84,7 @@ std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition()
 
 			distanceForEveryReachablePosition[newPositionToReach.y][newPositionToReach.x] = distanceForEveryReachablePosition[currentPosition.y][currentPosition.x] + 1;
 			positionToReach.push(newPositionToReach);
+			reachedFrom[newPositionToReach.y][newPositionToReach.x] = currentPosition;
 		}
 
 		if (currentPosition.x - 1 >= 0 && map[currentPosition.y][currentPosition.x - 1] != OBSTACLE_SYMBOL
@@ -76,6 +95,7 @@ std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition()
 
 			distanceForEveryReachablePosition[newPositionToReach.y][newPositionToReach.x] = distanceForEveryReachablePosition[currentPosition.y][currentPosition.x] + 1;
 			positionToReach.push(newPositionToReach);
+			reachedFrom[newPositionToReach.y][newPositionToReach.x] = currentPosition;
 		}
 
 		positionToReach.pop();
@@ -96,6 +116,19 @@ std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition()
 
 		std::cout << '\n';
 	}
+
+	Position finalDestination;
+	finalDestination.x = mapNumberOfRows - 1;
+	finalDestination.y = mapNumberOfCols - 1;
+
+	while (!(finalDestination == m_Position))
+	{
+		m_ShortestWay.push(finalDestination);
+		std::cout << "( " << finalDestination.x << " ; " << finalDestination.y << ")" << " -> ";
+		finalDestination = reachedFrom[finalDestination.y][finalDestination.x];
+	}
+
+	m_ShortestWay.push(m_Position);
 
 	return distanceForEveryReachablePosition;
 }

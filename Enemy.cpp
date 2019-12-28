@@ -34,6 +34,12 @@ void Enemy::Move()
 std::vector<Enemy> GenerateEnemies(std::vector<std::string>& map, const size_t numberOfElements)
 {
 	std::vector<Enemy> result;
+
+	if (numberOfElements == 0)
+	{
+		return result;
+	}
+
 	result.reserve(numberOfElements);
 
 	std::mt19937 generator(time(NULL));
@@ -75,6 +81,9 @@ void MoveEnemies(std::vector<Enemy>& enemies)
 
 bool IsPlayerCollidingWithEnemies(const Position& playerPosition, const std::vector<Enemy>& enemies)
 {
+	if (enemies.size() == 0)
+		return false;
+
 	for (const auto& enemy : enemies)
 	{
 		const Position& enemyPosition = enemy.GetPosition();

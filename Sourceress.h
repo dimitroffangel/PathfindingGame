@@ -5,14 +5,17 @@
 
 #include <vector>
 #include <string>
-#include <queue>
+#include <stack>
 
 class Sourceress
 {
 private:
 	Position m_Position;
-	std::queue<Position> m_ShortestWay;
+	std::stack<Position> m_ShortestWay;
 	std::vector<std::string>* m_Map;
+
+public:
+	bool m_CanMove = true;
 
 public:
 	Sourceress(std::vector<std::string>& map)
@@ -24,7 +27,7 @@ public:
 	void Move();
 
 private:
-	std::vector<std::vector<int>> CalculateTheDistanceToEveryPosition() const;
+	std::vector<std::vector<int>> CalculateTheDistanceToEveryPosition();
 };
 
 #endif

@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnitityComponent.h" />
+    <ClInclude Include="InputComponent.h" />
     <ClInclude Include="Mage.h" />
     <ClInclude Include="Sourceress.h" />
   </ItemGroup>
