@@ -1,7 +1,22 @@
 #include "GameLogic.h"
-
 #include "Enemy.h"
 #include "InputComponent.h"
+#include "Sourceress.h"
+
+GameLogic::GameLogic(const std::string& playerChoice, std::vector<MapData>& data)
+{
+	std::vector<std::string>& map = data[0].map;
+
+	if (playerChoice == "mage")
+	{
+		m_PlayerCharacter = std::make_unique<Mage>();
+	}
+
+	else if (playerChoice == "sourceress")
+	{
+		m_PlayerCharacter = std::make_unique<Sourceress>();
+	}
+}
 
 void GameLogic::Loop(std::vector<MapData>& data)
 {

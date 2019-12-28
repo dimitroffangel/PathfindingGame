@@ -54,8 +54,6 @@ struct MapData
 
 bool operator==(const Position& a, const Position& b);
 
-int GenerateNumber(std::mt19937& generator, const int fromSize, const int toSize);
-
 bool IsEntityCollidingWithObstacle(const std::vector<std::string>& map, const Position& position);
 
 int GetNumberOfPassableObjectsOnMap(const std::vector<std::string>& map);

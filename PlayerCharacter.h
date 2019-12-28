@@ -10,7 +10,6 @@ protected:
 	std::vector<std::string>* m_Map;
 	bool m_CanMove = true;
 
-
 public:
 	bool CanMove() const
 	{

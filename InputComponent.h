@@ -2,7 +2,7 @@
 #define INPUTCOMPONENT_H_GUARD
 
 #include "EnitityComponent.h"
-
+ 
 #include <fstream>
 #include <vector>
 #include <string>
