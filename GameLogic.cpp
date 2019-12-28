@@ -26,9 +26,9 @@ void GameLogic::Loop(std::vector<MapData>& data)
 	{
 		std::vector<std::string>& map = data[i].map;
 
-		PrintMap(map);
-
 		auto enemies = GenerateEnemies(map, data[i].numberOfMonsters);
+
+		PrintMap(map);
 
 		m_PlayerCharacter->SetMap(map);
 

@@ -65,7 +65,6 @@ std::vector<Enemy> GenerateEnemies(std::vector<std::string>& map, const size_t n
 			position.y = currentEnemyY;
 		}
 
-		map[position.y][position.x] = ENEMY_SYMBOL;
 		result.push_back(Enemy(position, &map));
 	}
 

@@ -26,7 +26,7 @@ public:
 			std::cerr << "Enemy():: m_Map was nullptr..." << '\n';
 		}
 
-		(*map)[position.x][position.y] = ENEMY_SYMBOL;
+		(*map)[position.y][position.x] = ENEMY_SYMBOL;
 	}
 
 public:
