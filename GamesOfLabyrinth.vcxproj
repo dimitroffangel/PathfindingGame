@@ -125,16 +125,20 @@
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnitityComponent.cpp" />
+    <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerClass.cpp" />
     <ClCompile Include="Sourceress.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnitityComponent.h" />
+    <ClInclude Include="GameLogic.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="Mage.h" />
+    <ClInclude Include="PlayerClass.h" />
     <ClInclude Include="Sourceress.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

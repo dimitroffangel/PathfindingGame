@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-void Mage::TryMoving()
+void Mage::Move()
 {
 	bool hasMoved = false;
 
@@ -141,7 +141,7 @@ void Mage::TryMoving()
 	}
 
 	m_IsTeleportingBack = true;
-	TryMoving();
+	Move();
 }
 
 bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std::vector<std::string>* pointerToMap, const Position& position)

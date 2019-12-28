@@ -64,8 +64,14 @@ bool IsEntityCollidingWithObstacle(const std::vector<std::string>& map, const Po
 
 int GetNumberOfPassableObjectsOnMap(const std::vector<std::string>& map);
 
+void PrintMap(const std::vector<std::string>& map);
+
 void AddObstacleToMap(std::vector<std::string>& map, int x, int y);
 
-bool DoesMapHasRouteFromStartToFinish_And_WithValidSymbols(const std::vector<std::string>& map);
+bool IsMapWithValidSymbols(const std::vector<std::string>& map);
+
+bool DoesMapHasRouteFromStartToFinish(const std::vector<std::string>& map);
+
+void SortContainerOfMaps(std::vector<MapData>& data);
 
 #endif

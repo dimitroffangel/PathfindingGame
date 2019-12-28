@@ -2,29 +2,30 @@
 #define SOURCERESS_H_GUARD
 
 #include "EnitityComponent.h"
+#include "PlayerClass.h"
 
 #include <vector>
 #include <string>
 #include <stack>
 
-class Sourceress
+class Sourceress : public PlayerClass
 {
 private:
-	Position m_Position;
 	std::stack<Position> m_ShortestWay;
-	std::vector<std::string>* m_Map;
 
 public:
-	bool m_CanMove = true;
+	Sourceress()
+	{
 
-public:
+	}
+
 	Sourceress(std::vector<std::string>& map)
-		:m_Map(&map)
+		:PlayerClass(map)
 	{
 		CalculateTheDistanceToEveryPosition();
 	}
 
-	void Move();
+	virtual void Move() override;
 
 private:
 	std::vector<std::vector<int>> CalculateTheDistanceToEveryPosition();

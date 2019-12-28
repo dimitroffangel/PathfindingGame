@@ -2,6 +2,7 @@
 #define MAGE_H_GUARD
 
 #include "EnitityComponent.h"
+#include "PlayerClass.h"
 
 #include <stack>
 #include <vector>
@@ -9,18 +10,14 @@
 
 bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std::vector<std::string>* pointerToMap, const Position& position);
 
-class Mage
+class Mage : public PlayerClass
 {
 private:
-	std::vector<std::string>* m_Map;
 	Position m_Position;
 	std::stack<Position> m_AvailableRoutes;
 	std::vector<Position> m_IteratedPosition;
 	Direction m_Direction = directionDown;
 	bool m_IsTeleportingBack = false;
-
-public:
-	bool m_CanMove = true;
 
 	const Position& GetPosition() const
 	{
@@ -28,8 +25,13 @@ public:
 	}
 
 public:
-	Mage(std::vector<std::string>* map)
-		:m_Map(map)
+	Mage()
+	{
+
+	}
+
+	Mage(std::vector<std::string>& map)
+		:PlayerClass(map)
 	{
 		m_IteratedPosition.push_back(m_Position);
 
@@ -40,7 +42,7 @@ public:
 	}
 
 public:
-	void TryMoving();
+	virtual void Move() override;
 };
 
 #endif

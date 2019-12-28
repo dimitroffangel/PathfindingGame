@@ -57,7 +57,7 @@ bool IsMapValid(const MapData& entitiyMap)
 		return false;
 	}
 
-	if (!DoesMapHasRouteFromStartToFinish_And_WithValidSymbols(entitiyMap.map))
+	if (!IsMapWithValidSymbols(entitiyMap.map) || !DoesMapHasRouteFromStartToFinish(entitiyMap.map))
 	{
 		return false;
 	}
@@ -66,7 +66,7 @@ bool IsMapValid(const MapData& entitiyMap)
 }
 
 
-void ReadNumberOfObstacledToBeAdded(const std::vector<std::string>& map)
+std::vector<Position> ReadNumberOfObstacledToBeAdded(std::vector<std::string>& map)
 {
 	int numberOfPlayerPlacedObstacles;
 	const int numberOfPassablePositions = GetNumberOfPassableObjectsOnMap(map);
@@ -78,4 +78,38 @@ void ReadNumberOfObstacledToBeAdded(const std::vector<std::string>& map)
 		std::cin >> numberOfPlayerPlacedObstacles;
 	} 
 	while (numberOfPlayerPlacedObstacles < 0 || numberOfPlayerPlacedObstacles >= numberOfPassablePositions - 2);
+
+	std::vector<Position> addedObstaclesPositions;
+	addedObstaclesPositions.reserve(numberOfPassablePositions);
+	Position newObstaclePosition;
+
+	std::cout << "Enter positions, you want to block..." << '\n';
+	for (size_t i = 0; i < numberOfPlayerPlacedObstacles; i++)
+	{
+		std::cout << "Enter the positions";
+		do
+		{
+			std::cout << "X can be from 0 to " << map[0].size() - 1 << "Y can be from 0 to " << map.size() - 1 << ": ";
+			std::cin >> newObstaclePosition.x >> newObstaclePosition.y;
+
+		} 
+		while (newObstaclePosition.x < 0 || newObstaclePosition.y < 0 || newObstaclePosition.x >= map[0].size() || newObstaclePosition.y >= map.size() 
+				|| map[newObstaclePosition.y][newObstaclePosition.x] == ENEMY_SYMBOL || map[newObstaclePosition.y][newObstaclePosition.x] == OBSTACLE_SYMBOL || 
+				(newObstaclePosition.x == 0 && newObstaclePosition.y == 0) || (newObstaclePosition.x == map[0].size() - 1 && newObstaclePosition.y == map.size() - 1));
+	
+		map[newObstaclePosition.y][newObstaclePosition.x] = PLAYER_OBSTACLE_SYMBOL;
+		addedObstaclesPositions.push_back(newObstaclePosition);
+	}
+
+	return addedObstaclesPositions;
+}
+
+void ReadPlayerChoiceOFClass(std::string& playerClass)
+{
+	std::cout << "Type the class you want to play with for the remainder of the session... You have choice between a 'mage' or a 'sourceress'... " << '\n';
+
+	do
+	{
+		std::cin >> playerClass;
+	} while (playerClass != "mage" && playerClass != "sourceress");
 }

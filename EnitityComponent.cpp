@@ -95,6 +95,19 @@ int GetNumberOfPassableObjectsOnMap(const std::vector<std::string>& map)
 	return numberOfPassableObjectsOnMao;
 }
 
+void PrintMap(const std::vector<std::string>& map)
+{
+	for (const auto& row : map)
+	{
+		for (const auto& col : row)
+		{
+			std::cout << col << " ";
+		}
+
+		std::cout << '\n';
+	}
+}
+
 void AddObstacleToMap(std::vector<std::string>& map, int x, int y)
 {
 	if (x < 0 || x >= map.size())
@@ -112,7 +125,26 @@ void AddObstacleToMap(std::vector<std::string>& map, int x, int y)
 	map[x][y] = OBSTACLE_SYMBOL;
 }
 
-bool DoesMapHasRouteFromStartToFinish_And_WithValidSymbols(const std::vector<std::string>& map)
+bool IsMapWithValidSymbols(const std::vector<std::string>& map)
+{
+	const size_t mapNumberOfRows = map.size();
+	const size_t mapNumberOfCols = map[0].size();
+
+	for (size_t row = 0; row < mapNumberOfRows; row++)
+	{
+		for (size_t col = 0; col < mapNumberOfCols; col++)
+		{
+			if (map[row][col] != OBSTACLE_SYMBOL && map[row][col] != FREE_POSITION_SYMBOL)
+			{
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+
+bool DoesMapHasRouteFromStartToFinish(const std::vector<std::string>& map)
 {
 	const size_t mapNumberOfRows = map.size();
 	const size_t mapNumberOfCols = map[0].size();
@@ -128,11 +160,6 @@ bool DoesMapHasRouteFromStartToFinish_And_WithValidSymbols(const std::vector<std
 	{
 		for (size_t col = 0; col < mapNumberOfCols; col++)
 		{
-			if (map[row][col] != OBSTACLE_SYMBOL && map[row][col] != FREE_POSITION_SYMBOL)
-			{
-				return false;
-			}
-
 			if (map[row][col] != OBSTACLE_SYMBOL)
 				distanceForEveryReachablePosition[row].push_back(mapNumberOfCols * mapNumberOfRows);
 
@@ -156,7 +183,8 @@ bool DoesMapHasRouteFromStartToFinish_And_WithValidSymbols(const std::vector<std
 			return true;
 		}
 
-		if (currentPosition.y - 1 >= 0 && map[currentPosition.y - 1][currentPosition.x] != OBSTACLE_SYMBOL
+		if (currentPosition.y - 1 >= 0 && map[currentPosition.y - 1][currentPosition.x] != OBSTACLE_SYMBOL 
+			&& map[currentPosition.y - 1][currentPosition.x] != PLAYER_OBSTACLE_SYMBOL
 			&& distanceForEveryReachablePosition[currentPosition.y][currentPosition.x] + 1 <= distanceForEveryReachablePosition[currentPosition.y - 1][currentPosition.x])
 		{
 			Position newPositionToReach = currentPosition;
@@ -166,7 +194,8 @@ bool DoesMapHasRouteFromStartToFinish_And_WithValidSymbols(const std::vector<std
 			positionToReach.push(newPositionToReach);
 		}
 
-		if (currentPosition.x + 1 < map[0].size() && map[currentPosition.y][currentPosition.x + 1] != OBSTACLE_SYMBOL
+		if (currentPosition.x + 1 < map[0].size() && map[currentPosition.y][currentPosition.x + 1] != OBSTACLE_SYMBOL 
+			&& map[currentPosition.y][currentPosition.x + 1] != PLAYER_OBSTACLE_SYMBOL
 			&& distanceForEveryReachablePosition[currentPosition.y][currentPosition.x] + 1 <= distanceForEveryReachablePosition[currentPosition.y][currentPosition.x + 1])
 		{
 			Position newPositionToReach = currentPosition;
@@ -177,6 +206,7 @@ bool DoesMapHasRouteFromStartToFinish_And_WithValidSymbols(const std::vector<std
 		}
 
 		if (currentPosition.y + 1 < map.size() && map[currentPosition.y + 1][currentPosition.x] != OBSTACLE_SYMBOL
+			&& map[currentPosition.y + 1][currentPosition.x] != PLAYER_OBSTACLE_SYMBOL
 			&& distanceForEveryReachablePosition[currentPosition.y][currentPosition.x] + 1 <= distanceForEveryReachablePosition[currentPosition.y + 1][currentPosition.x])
 		{
 			Position newPositionToReach = currentPosition;
@@ -186,7 +216,8 @@ bool DoesMapHasRouteFromStartToFinish_And_WithValidSymbols(const std::vector<std
 			positionToReach.push(newPositionToReach);
 		}
 
-		if (currentPosition.x - 1 >= 0 && map[currentPosition.y][currentPosition.x - 1] != OBSTACLE_SYMBOL
+		if (currentPosition.x - 1 >= 0 && map[currentPosition.y][currentPosition.x - 1] != OBSTACLE_SYMBOL 
+			&& map[currentPosition.y][currentPosition.x - 1] != PLAYER_OBSTACLE_SYMBOL
 			&& distanceForEveryReachablePosition[currentPosition.y][currentPosition.x] + 1 <= distanceForEveryReachablePosition[currentPosition.y][currentPosition.x - 1])
 		{
 			Position newPositionToReach = currentPosition;
@@ -200,4 +231,22 @@ bool DoesMapHasRouteFromStartToFinish_And_WithValidSymbols(const std::vector<std
 	}
 
 	return false;
+}
+
+void SortContainerOfMaps(std::vector<MapData>& data)
+{
+	auto predicate = [data](const MapData& lhs, const MapData& rhs)
+	{
+		const size_t lhsMapSize = lhs.map.size() * lhs.map[0].size();
+		const size_t rhsMapSize = rhs.map.size() * rhs.map[0].size();
+
+		if (lhsMapSize == rhsMapSize)
+		{
+			return lhs.numberOfMonsters < rhs.numberOfMonsters;
+		}
+
+		return lhsMapSize < rhsMapSize;
+	};
+
+	std::sort(data.begin(), data.end(), predicate);
 }
