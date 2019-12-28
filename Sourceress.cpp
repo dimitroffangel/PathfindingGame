@@ -37,7 +37,7 @@ std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition()
 		{
 			reachedFrom[row].push_back(Position());
 
-			if (map[row][col] != OBSTACLE_SYMBOL)
+			if (map[row][col] == FREE_POSITION_SYMBOL)
 				distanceForEveryReachablePosition[row].push_back(mapNumberOfCols * mapNumberOfRows);
 
 			else
@@ -53,7 +53,7 @@ std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition()
 	{
 		const Position& currentPosition = positionToReach.front();
 
-		if (currentPosition.y - 1 >= 0 && map[currentPosition.y - 1][currentPosition.x] != OBSTACLE_SYMBOL 
+		if (currentPosition.y - 1 >= 0 && map[currentPosition.y - 1][currentPosition.x] == FREE_POSITION_SYMBOL 
 			&& distanceForEveryReachablePosition[currentPosition.y][currentPosition.x] + 1 <= distanceForEveryReachablePosition[currentPosition.y - 1][currentPosition.x])
 		{
 			Position newPositionToReach = currentPosition;
@@ -64,7 +64,7 @@ std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition()
 			reachedFrom[newPositionToReach.y][newPositionToReach.x] = currentPosition;
 		}
 
-		if (currentPosition.x + 1 < map[0].size() && map[currentPosition.y][currentPosition.x + 1] != OBSTACLE_SYMBOL
+		if (currentPosition.x + 1 < map[0].size() && map[currentPosition.y][currentPosition.x + 1] == FREE_POSITION_SYMBOL
 			&& distanceForEveryReachablePosition[currentPosition.y][currentPosition.x] + 1 <= distanceForEveryReachablePosition[currentPosition.y][currentPosition.x + 1])
 		{
 			Position newPositionToReach = currentPosition;
@@ -75,7 +75,7 @@ std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition()
 			reachedFrom[newPositionToReach.y][newPositionToReach.x] = currentPosition;
 		}
 
-		if (currentPosition.y + 1 < map.size() && map[currentPosition.y + 1][currentPosition.x] != OBSTACLE_SYMBOL
+		if (currentPosition.y + 1 < map.size() && map[currentPosition.y + 1][currentPosition.x] == FREE_POSITION_SYMBOL
 			&& distanceForEveryReachablePosition[currentPosition.y][currentPosition.x] + 1 <= distanceForEveryReachablePosition[currentPosition.y + 1][currentPosition.x])
 		{
 			Position newPositionToReach = currentPosition;
@@ -86,7 +86,7 @@ std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition()
 			reachedFrom[newPositionToReach.y][newPositionToReach.x] = currentPosition;
 		}
 
-		if (currentPosition.x - 1 >= 0 && map[currentPosition.y][currentPosition.x - 1] != OBSTACLE_SYMBOL
+		if (currentPosition.x - 1 >= 0 && map[currentPosition.y][currentPosition.x - 1] == FREE_POSITION_SYMBOL
 			&& distanceForEveryReachablePosition[currentPosition.y][currentPosition.x] + 1 <= distanceForEveryReachablePosition[currentPosition.y][currentPosition.x - 1])
 		{
 			Position newPositionToReach = currentPosition;

@@ -14,7 +14,7 @@ void Mage::TryMoving()
 
 	map[m_Position.y][m_Position.x] = FREE_POSITION_SYMBOL;
 	
-	if ((m_Direction == directionUp || m_IsTeleportingBack) && m_Position.y - 1 >= 0 && map[m_Position.y - 1][m_Position.x] != OBSTACLE_SYMBOL)
+	if ((m_Direction == directionUp || m_IsTeleportingBack) && m_Position.y - 1 >= 0 && map[m_Position.y - 1][m_Position.x] == FREE_POSITION_SYMBOL)
 	{
 		newPosition.y--;
 		hasMoved = true;
@@ -35,7 +35,7 @@ void Mage::TryMoving()
 		}
 	}
 
-	if (!hasMoved && (m_Direction == directionRight || m_IsTeleportingBack) && m_Position.x + 1 < map[0].size() && map[m_Position.y][m_Position.x + 1] != OBSTACLE_SYMBOL)
+	if (!hasMoved && (m_Direction == directionRight || m_IsTeleportingBack) && m_Position.x + 1 < map[0].size() && map[m_Position.y][m_Position.x + 1] == FREE_POSITION_SYMBOL)
 	{
 		newPosition.x++;
 		hasMoved = true;
@@ -56,7 +56,7 @@ void Mage::TryMoving()
 		}
 	}
 
-	if (!hasMoved && (m_Direction == directionDown || m_IsTeleportingBack )&&  m_Position.y + 1 < map[0].size() && map[m_Position.y + 1][m_Position.x] != OBSTACLE_SYMBOL)
+	if (!hasMoved && (m_Direction == directionDown || m_IsTeleportingBack )&&  m_Position.y + 1 < map[0].size() && map[m_Position.y + 1][m_Position.x] == FREE_POSITION_SYMBOL)
 	{
 		newPosition.y++;
 		hasMoved = true;
@@ -77,7 +77,7 @@ void Mage::TryMoving()
 		}
 	}
 
-	if (!hasMoved && (m_Direction == directionLeft || m_IsTeleportingBack) && m_Position.x - 1 >= 0 && map[m_Position.y][m_Position.x - 1] != OBSTACLE_SYMBOL)
+	if (!hasMoved && (m_Direction == directionLeft || m_IsTeleportingBack) && m_Position.x - 1 >= 0 && map[m_Position.y][m_Position.x - 1] == FREE_POSITION_SYMBOL)
 	{
 		newPosition.x--;
 		hasMoved = true;
@@ -156,7 +156,7 @@ bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std
 
 	int counterOfRoadsFromPosition = 0;
 	
-	if (position.y - 1 >= 0 && map[position.y - 1][position.x] != OBSTACLE_SYMBOL)
+	if (position.y - 1 >= 0 && map[position.y - 1][position.x] == FREE_POSITION_SYMBOL)
 	{
 		Position newPosition = position;
 		newPosition.y--;
@@ -167,7 +167,7 @@ bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std
 		}
 	}
 
-	if (position.x + 1 < map[0].size() && map[position.y][position.x + 1] != OBSTACLE_SYMBOL)
+	if (position.x + 1 < map[0].size() && map[position.y][position.x + 1] == FREE_POSITION_SYMBOL)
 	{
 		Position newPosition = position;
 		newPosition.x++;
@@ -179,7 +179,7 @@ bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std
 		}
 	}
 
-	if (position.y + 1 < map.size() && map[position.y + 1][position.x] != OBSTACLE_SYMBOL)
+	if (position.y + 1 < map.size() && map[position.y + 1][position.x] == FREE_POSITION_SYMBOL)
 	{
 		Position newPosition = position;
 		newPosition.y++;
@@ -191,7 +191,7 @@ bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std
 		}
 	}
 
-	if (position.x - 1 >= 0 && map[position.y][position.x - 1] != OBSTACLE_SYMBOL)
+	if (position.x - 1 >= 0 && map[position.y][position.x - 1] == FREE_POSITION_SYMBOL)
 	{
 		Position newPosition = position;
 		newPosition.x--;
