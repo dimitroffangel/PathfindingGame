@@ -3,7 +3,9 @@
 #include <string>
 
 #include "Mage.h"
+#include "Sourceress.h"
 #include "Enemy.h"
+
 
 int main()
 {
@@ -24,28 +26,31 @@ int main()
 		"##......"
 	};
 
-	const size_t numberOfElements = 1;
+	Sourceress sourceress(map);
 
-	std::vector<Enemy> enemies = GenerateEnemies(map, numberOfElements);
-	Mage mage(&map);
-	
-	int numberOfPlayerPlacedObstacles;
-	const int numberOfPassablePositions = GetNumberOfPassableObjectsOnMap(map);
 
-	std::cout << "Enter the number of obstacles you want to add into the level..." << '\n';
+	//const size_t numberOfElements = 1;
 
-	do
-	{
-		std::cin >> numberOfPlayerPlacedObstacles;
-	} 
-	while (numberOfPlayerPlacedObstacles < 0 || numberOfPlayerPlacedObstacles >= numberOfPassablePositions - 2);
+	//std::vector<Enemy> enemies = GenerateEnemies(map, numberOfElements);
+	//Mage mage(&map);
+	//
+	//int numberOfPlayerPlacedObstacles;
+	//const int numberOfPassablePositions = GetNumberOfPassableObjectsOnMap(map);
 
-	while (mage.m_CanMove && !IsPlayerCollidingWithEnemies(mage.GetPosition(), enemies))
-	{
-		
-		MoveEnemies(enemies);
-		mage.TryMoving();
-	}
+	//std::cout << "Enter the number of obstacles you want to add into the level..." << '\n';
+
+	//do
+	//{
+	//	std::cin >> numberOfPlayerPlacedObstacles;
+	//} 
+	//while (numberOfPlayerPlacedObstacles < 0 || numberOfPlayerPlacedObstacles >= numberOfPassablePositions - 2);
+
+	//while (mage.m_CanMove && !IsPlayerCollidingWithEnemies(mage.GetPosition(), enemies))
+	//{
+	//	
+	//	MoveEnemies(enemies);
+	//	mage.TryMoving();
+	//}
 
 	return 0;
 }

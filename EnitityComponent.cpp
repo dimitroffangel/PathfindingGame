@@ -92,3 +92,20 @@ int GetNumberOfPassableObjectsOnMap(const std::vector<std::string>& map)
 
 	return numberOfPassableObjectsOnMao;
 }
+
+void AddObstacleToMap(std::vector<std::string>& map, int x, int y)
+{
+	if (x < 0 || x >= map.size())
+	{
+		std::cerr << "AddObstacleToMap():: x was invalid..." << '\n';
+		return;
+	}
+
+	if (y < 0 || y >= map.size())
+	{
+		std::cerr << "AddObstacleToMap():: y was invalid..." << '\n';
+		return;
+	}
+
+	map[x][y] = OBSTACLE_SYMBOL;
+}
