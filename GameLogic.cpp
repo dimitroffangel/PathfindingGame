@@ -55,6 +55,7 @@ void GameLogic::Loop(std::vector<MapData>& data)
 			MoveEnemies(enemies);
 			m_PlayerCharacter->Move();
 			isPlayerCollidingWithEnemies = isPlayerCollidingWithEnemies;
+			PrintMap(map);
 		}
 
 		const Position& playerPostion = m_PlayerCharacter->GetPosition();
