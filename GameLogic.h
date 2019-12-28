@@ -2,7 +2,7 @@
 #define GAMELOGIC_H_GUARD
 
 #include "EnitityComponent.h"
-#include "PlayerClass.h"
+#include "PlayerCharacter.h"
 #include "Mage.h"
 #include "Sourceress.h"
 
@@ -12,7 +12,7 @@
 class GameLogic
 {
 private:
-	std::unique_ptr<PlayerClass> m_PlayerClass;
+	std::unique_ptr<PlayerCharacter> m_PlayerCharacter;
 
 public:
 	GameLogic(const std::string& playerChoice, std::vector<MapData>& data)
@@ -21,12 +21,12 @@ public:
 
 		if (playerChoice == "mage")
 		{
-			m_PlayerClass = std::make_unique<Mage>();
+			m_PlayerCharacter = std::make_unique<Mage>();
 		}
 
 		else if (playerChoice == "sourceress")
 		{
-			m_PlayerClass = std::make_unique<Sourceress>();
+			m_PlayerCharacter = std::make_unique<Sourceress>();
 		}
 	}
 

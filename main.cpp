@@ -10,16 +10,16 @@
 
 void InitializeGame()
 {
-	std::string playerClassName;
+	std::string playerCharacterName;
 	std::vector<MapData> data = ReadMap("./maps.txt");
 	SortContainerOfMaps(data);
 
-	ReadPlayerChoiceOFClass(playerClassName);
+	ReadPlayerChoiceOFClass(playerCharacterName);
 
-	GameLogic gameLogic = GameLogic(playerClassName, data);
+	GameLogic gameLogic = GameLogic(playerCharacterName, data);
 	gameLogic.Loop(data);
 
-	std::cout << "if you want to play again pres y";
+	std::cout << "if you want to play again press y";
 	
 	char input;
 	std::cin >> input;

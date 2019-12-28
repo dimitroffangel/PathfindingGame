@@ -15,7 +15,7 @@ void GameLogic::Loop(std::vector<MapData>& data)
 
 		auto enemies = GenerateEnemies(map, data[i].numberOfMonsters);
 
-		m_PlayerClass->SetMap(map);
+		m_PlayerCharacter->SetMap(map);
 
 		{
 			std::vector<Position> addedObstacles = ReadNumberOfObstacledToBeAdded(map);
@@ -35,14 +35,14 @@ void GameLogic::Loop(std::vector<MapData>& data)
 
 		bool isPlayerCollidingWithEnemies = false;
 
-		while (m_PlayerClass->CanMove() || isPlayerCollidingWithEnemies)
+		while (m_PlayerCharacter->CanMove() || isPlayerCollidingWithEnemies)
 		{
 			MoveEnemies(enemies);
-			m_PlayerClass->Move();
+			m_PlayerCharacter->Move();
 			isPlayerCollidingWithEnemies = isPlayerCollidingWithEnemies;
 		}
 
-		const Position& playerPostion = m_PlayerClass->GetPosition();
+		const Position& playerPostion = m_PlayerCharacter->GetPosition();
 
 		if (playerPostion.x != map[0].size() - 1 || playerPostion.y != map.size() - 1 || isPlayerCollidingWithEnemies)
 		{

@@ -1,9 +1,9 @@
-#ifndef PLAYERCLASS_H_GUARD
-#define PLAYERCLASS_H_GUARD
+#ifndef PLAYERCHARACTER_H_GUARD
+#define PLAYERCHARACTER_H_GUARD
 
 #include "EnitityComponent.h"
 
-class PlayerClass
+class PlayerCharacter
 {
 protected:
 	Position m_Position;
@@ -27,18 +27,18 @@ public:
 		m_Map = &map;
 	}
 
-	PlayerClass()
+	PlayerCharacter()
 	{
 
 	}
 
-	PlayerClass(std::vector<std::string>& map)
+	PlayerCharacter(std::vector<std::string>& map)
 		:m_Map(&map)
 	{
 
 	}
 
-	virtual ~PlayerClass()
+	virtual ~PlayerCharacter()
 	{
 
 	}

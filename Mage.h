@@ -2,7 +2,7 @@
 #define MAGE_H_GUARD
 
 #include "EnitityComponent.h"
-#include "PlayerClass.h"
+#include "PlayerCharacter.h"
 
 #include <stack>
 #include <vector>
@@ -10,7 +10,7 @@
 
 bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std::vector<std::string>* pointerToMap, const Position& position);
 
-class Mage : public PlayerClass
+class Mage : public PlayerCharacter
 {
 private:
 	Position m_Position;
@@ -31,7 +31,7 @@ public:
 	}
 
 	Mage(std::vector<std::string>& map)
-		:PlayerClass(map)
+		:PlayerCharacter(map)
 	{
 		m_IteratedPosition.push_back(m_Position);
 
