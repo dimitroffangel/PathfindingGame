@@ -54,3 +54,27 @@ void GameLogic::Loop(std::vector<MapData>& data)
 	std::cout << "You won..." << '\n';
 	
 }
+
+void InitializeGame()
+{
+	std::string playerCharacterName;
+	std::vector<MapData> data = ReadMap("./maps.txt");
+	SortContainerOfMaps(data);
+
+	ReadPlayerChoiceOFClass(playerCharacterName);
+
+	GameLogic gameLogic = GameLogic(playerCharacterName, data);
+	gameLogic.Loop(data);
+
+	std::cout << "if you want to play again press y";
+
+	char input;
+	std::cin >> input;
+
+	if (input == 'y')
+	{
+		return InitializeGame();
+	}
+
+	std::cout << "Thanks for playing..." << '\n';
+}

@@ -33,5 +33,7 @@ public:
 	void Loop(std::vector<MapData>& data);
 };
 
+void InitializeGame();
+
 #endif
 
