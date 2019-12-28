@@ -38,8 +38,7 @@ enum Direction
 struct Position
 {
 	int x = 0, y = 0;
-	Direction direction = directionNone;
-
+	
 	Position()
 	{
 

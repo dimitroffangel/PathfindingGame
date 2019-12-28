@@ -47,7 +47,6 @@ int main()
 
 	//Sourceress sourceress(map);
 
-
 	//const size_t numberOfElements = 0;
 
 	//std::vector<Enemy> enemies = GenerateEnemies(map, numberOfElements);

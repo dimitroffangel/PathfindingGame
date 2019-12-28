@@ -31,7 +31,6 @@ public:
 	Mage(std::vector<std::string>* map)
 		:m_Map(map)
 	{
-		m_Position.direction = m_Direction;
 		m_IteratedPosition.push_back(m_Position);
 
 		if (IsPositionReusable(m_IteratedPosition, m_Map, m_Position))
