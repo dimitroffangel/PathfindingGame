@@ -5,8 +5,14 @@
 #include <unordered_map>
 
 void Sourceress::Move()
-{
+{	
 	std::vector<std::string>& map = *m_Map;
+
+	if (m_Position.x == map[0].size() - 1 && m_Position.y == map.size() - 1)
+	{
+		m_CanMove = false;
+		return;
+	}
 
 	if(map[m_Position.y][m_Position.x] == PLAYER_SYMBOL)
 		map[m_Position.y][m_Position.x] = FREE_POSITION_SYMBOL;
@@ -143,8 +149,8 @@ std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition()
 	//}
 
 	Position finalDestination;
-	finalDestination.x = mapNumberOfRows - 1;
-	finalDestination.y = mapNumberOfCols - 1;
+	finalDestination.x = mapNumberOfCols - 1;
+	finalDestination.y = mapNumberOfRows - 1;
 
 	// printing the route to the end
 	while (!(finalDestination == m_Position))
