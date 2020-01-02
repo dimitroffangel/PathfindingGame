@@ -94,7 +94,7 @@ std::vector<Position> ReadNumberOfObstacledToBeAdded(std::vector<std::string>& m
 		std::cin >> numberOfPlayerPlacedObstacles;
 	} 
 
-	while (numberOfPlayerPlacedObstacles < 0 || (numberOfPlayerPlacedObstacles >= numberOfPassablePositions - 2));
+	while (numberOfPlayerPlacedObstacles < 0 || (numberOfPlayerPlacedObstacles > numberOfPassablePositions - 2));
 
 	if (numberOfPlayerPlacedObstacles == 0)
 	{
