@@ -163,7 +163,7 @@ void Mage::InitializeCharacter()
 	}
 }
 
-bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std::vector<std::string>* pointerToMap, const Position& position)
+bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std::vector<std::string>* pointerToMap, const Position& positionToCheck)
 {
 	if (pointerToMap == nullptr)
 	{
@@ -175,9 +175,9 @@ bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std
 
 	int counterOfRoadsFromPosition = 0;
 	
-	if (position.y - 1 >= 0 && map[position.y - 1][position.x] == FREE_POSITION_SYMBOL)
+	if (positionToCheck.y - 1 >= 0 && map[positionToCheck.y - 1][positionToCheck.x] == FREE_POSITION_SYMBOL)
 	{
-		Position newPosition = position;
+		Position newPosition = positionToCheck;
 		newPosition.y--;
 
 		if (std::find(blockedPositions.begin(), blockedPositions.end(), newPosition) == blockedPositions.end())
@@ -186,9 +186,9 @@ bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std
 		}
 	}
 
-	if (position.x + 1 < map[0].size() && map[position.y][position.x + 1] == FREE_POSITION_SYMBOL)
+	if (positionToCheck.x + 1 < map[0].size() && map[positionToCheck.y][positionToCheck.x + 1] == FREE_POSITION_SYMBOL)
 	{
-		Position newPosition = position;
+		Position newPosition = positionToCheck;
 		newPosition.x++;
 
 		if (std::find(blockedPositions.begin(), blockedPositions.end(), newPosition) == blockedPositions.end())
@@ -198,9 +198,9 @@ bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std
 		}
 	}
 
-	if (position.y + 1 < map.size() && map[position.y + 1][position.x] == FREE_POSITION_SYMBOL)
+	if (positionToCheck.y + 1 < map.size() && map[positionToCheck.y + 1][positionToCheck.x] == FREE_POSITION_SYMBOL)
 	{
-		Position newPosition = position;
+		Position newPosition = positionToCheck;
 		newPosition.y++;
 
 		if (std::find(blockedPositions.begin(), blockedPositions.end(), newPosition) == blockedPositions.end())
@@ -210,9 +210,9 @@ bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std
 		}
 	}
 
-	if (position.x - 1 >= 0 && map[position.y][position.x - 1] == FREE_POSITION_SYMBOL)
+	if (positionToCheck.x - 1 >= 0 && map[positionToCheck.y][positionToCheck.x - 1] == FREE_POSITION_SYMBOL)
 	{
-		Position newPosition = position;
+		Position newPosition = positionToCheck;
 		newPosition.x--;
 
 		if (std::find(blockedPositions.begin(), blockedPositions.end(), newPosition) == blockedPositions.end())
