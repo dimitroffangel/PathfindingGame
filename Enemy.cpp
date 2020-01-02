@@ -18,12 +18,12 @@ void Enemy::Move()
 		m_Position.x--;
 	}
 
-	else if (m_Position.y + 1 < map[0].size() && map[m_Position.y + 1][m_Position.x] != OBSTACLE_SYMBOL)
+	else if (m_Position.y + 1 < map.size() && map[m_Position.y + 1][m_Position.x] != OBSTACLE_SYMBOL)
 	{
 		m_Position.y++;
 	}
 
-	else if (m_Position.x + 1 < map.size() && map[m_Position.y][m_Position.x + 1] != OBSTACLE_SYMBOL)
+	else if (m_Position.x + 1 < map[0].size() && map[m_Position.y][m_Position.x + 1] != OBSTACLE_SYMBOL)
 	{
 		m_Position.x++;
 	}
