@@ -78,11 +78,11 @@ void GameLogic::Loop(std::vector<MapData>& data)
 
 void InitializeGame()
 {
-	std::string playerCharacterName;
 	
 	std::vector<MapData> data = ReadMap("./maps.txt");
 	SortContainerOfMaps(data);
-
+	
+	std::string playerCharacterName;
 	ReadPlayerChoiceOFClass(playerCharacterName);
 
 	GameLogic gameLogic = GameLogic(playerCharacterName);

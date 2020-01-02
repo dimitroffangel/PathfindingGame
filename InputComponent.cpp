@@ -52,8 +52,7 @@ std::vector<MapData> ReadMap(const std::string& fileName)
 }
 
 std::vector<Position> ReadNumberOfObstacledToBeAdded(std::vector<std::string>& map)
-{
-	
+{	
 	int numberOfPlayerPlacedObstacles;
 	const int numberOfPassablePositions = GetNumberOfPassableObjectsOnMap(map);
 
@@ -68,7 +67,6 @@ std::vector<Position> ReadNumberOfObstacledToBeAdded(std::vector<std::string>& m
 		std::cout << "Enter the number of obstacles you want to be added, where the number must be between 0 and " << numberOfPassablePositions << "... " << '\n';
 		std::cin >> numberOfPlayerPlacedObstacles;
 	} 
-
 	while (numberOfPlayerPlacedObstacles < 0 || (numberOfPlayerPlacedObstacles > numberOfPassablePositions - 2));
 
 	if (numberOfPlayerPlacedObstacles == 0)
