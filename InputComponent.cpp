@@ -15,9 +15,14 @@ std::vector<MapData> ReadMap(const std::string& fileName)
 
 	while (readingFromFile >> numberOfRows && readingFromFile >> numberOfCols)
 	{
-		if (numberOfRows <= 0 || numberOfCols <= 0)
+		if (numberOfRows < 0 || numberOfCols < 0)
 		{
 			std::cout << "ReadMap():: Input has invalid arguments..." << '\n';
+			continue;
+		}
+
+		if (numberOfRows == 0 && numberOfCols == 0)
+		{
 			continue;
 		}
 
@@ -36,7 +41,6 @@ std::vector<MapData> ReadMap(const std::string& fileName)
 		// read the number of monsters
 		readingFromFile >> mapData.numberOfMonsters;
 		
-
 		// check is the map valid
 		if (IsMapValid(mapData))
 		{
@@ -51,6 +55,12 @@ bool IsMapValid(const MapData& entitiyMap)
 {
 	const size_t numberOfRows = entitiyMap.map.size();
 	const size_t numberOfCols = entitiyMap.map[0].size();
+	const size_t numberOFFreePositions = GetNumberOfPassableObjectsOnMap(entitiyMap.map);
+
+	if (entitiyMap.numberOfMonsters > 0 && entitiyMap.numberOfMonsters >= numberOFFreePositions - 1)
+	{
+		return false;
+	}
 
 	if (entitiyMap.map[0][0] != FREE_POSITION_SYMBOL || entitiyMap.map[numberOfRows - 1][numberOfCols - 1] != FREE_POSITION_SYMBOL)
 	{
@@ -68,16 +78,23 @@ bool IsMapValid(const MapData& entitiyMap)
 
 std::vector<Position> ReadNumberOfObstacledToBeAdded(std::vector<std::string>& map)
 {
+	
 	int numberOfPlayerPlacedObstacles;
 	const int numberOfPassablePositions = GetNumberOfPassableObjectsOnMap(map);
 
-	std::cout << "Enter the number of obstacles you want to be added... " << '\n';
+	if (numberOfPassablePositions <= 2)
+	{
+		std::cout << "There is no free position where to add an obstacle..." << '\n';
+		return std::vector<Position>();
+	}
 
 	do
 	{
+		std::cout << "Enter the number of obstacles you want to be added, where the number must be between 0 and " << numberOfPassablePositions << "... " << '\n';
 		std::cin >> numberOfPlayerPlacedObstacles;
 	} 
-	while (numberOfPlayerPlacedObstacles < 0 || numberOfPlayerPlacedObstacles >= numberOfPassablePositions - 2);
+
+	while (numberOfPlayerPlacedObstacles < 0 || (numberOfPlayerPlacedObstacles >= numberOfPassablePositions - 2));
 
 	if (numberOfPlayerPlacedObstacles == 0)
 	{

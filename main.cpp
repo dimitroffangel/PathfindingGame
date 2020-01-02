@@ -10,8 +10,8 @@
 
 int main()
 {
-	TestGame();
-	//InitializeGame();
+	//TestGame();
+	InitializeGame();
 
 	return 0;
 }

@@ -114,7 +114,7 @@ void TestGame()
 	
 	if (numberOfRows <= 0 || numberOfCols <= 0)
 	{
-		std::cout << "ReadMap():: Input has invalid arguments..." << '\n';
+		std::cout << "TestGame():: Input has invalid arguments..." << '\n';
 		return;
 	}
 
