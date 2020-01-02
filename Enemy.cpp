@@ -56,7 +56,7 @@ std::vector<Enemy> GenerateEnemies(std::vector<std::string>& map, const size_t n
 		position.x = currentEnemyX;
 		position.y = currentEnemyY;
 
-		while (!IsEntityCollidingWithObstacle(map, position))
+		while (IsEntityCollidingWithObstacle(map, position) || (position.x == 0 && position.y == 0))
 		{
 			currentEnemyX = randomX_Value(generator);
 			currentEnemyY = randomY_Value(generator);

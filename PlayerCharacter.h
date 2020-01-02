@@ -23,6 +23,11 @@ public:
 
 	void SetMap(std::vector<std::string>& map)
 	{
+		// reset player position
+		m_Position.x = 0;
+		m_Position.y = 0;
+		m_CanMove = true;
+
 		m_Map = &map;
 	}
 
@@ -43,6 +48,7 @@ public:
 	}
 
 	virtual void Move() = 0;
+	virtual void InitializeCharacter() = 0;
 };
 
 #endif

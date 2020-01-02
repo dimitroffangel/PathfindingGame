@@ -124,7 +124,7 @@ void Mage::Move()
 
 	if (m_AvailableRoutes.size() == 0)
 	{
-		std::cout << "TryMoving():: Player cannot move anymore, due to no more availableRoutes..." << '\n';
+		std::cout << "Player cannot move anymore, due to no more availableRoutes..." << '\n';
 		m_CanMove = false;
 		return;
 	}
@@ -142,6 +142,24 @@ void Mage::Move()
 
 	m_IsTeleportingBack = true;
 	Move();
+}
+
+void Mage::InitializeCharacter()
+{
+	while (!m_AvailableRoutes.empty())
+	{
+		m_AvailableRoutes.pop();
+	}
+
+	m_IsTeleportingBack = false;
+	m_Direction = directionDown;
+	m_IteratedPosition.clear();
+	m_IteratedPosition.push_back(m_Position);
+
+	if (IsPositionReusable(m_IteratedPosition, m_Map, m_Position))
+	{
+		m_AvailableRoutes.push(m_Position);
+	}
 }
 
 bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std::vector<std::string>* pointerToMap, const Position& position)

@@ -13,7 +13,6 @@ bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std
 class Mage : public PlayerCharacter
 {
 private:
-	Position m_Position;
 	std::stack<Position> m_AvailableRoutes;
 	std::vector<Position> m_IteratedPosition;
 	Direction m_Direction = directionDown;
@@ -30,19 +29,20 @@ public:
 
 	}
 
-	Mage(std::vector<std::string>& map)
-		:PlayerCharacter(map)
-	{
-		m_IteratedPosition.push_back(m_Position);
+	//Mage(std::vector<std::string>& map)
+	//	:PlayerCharacter(map)
+	//{
+	//	m_IteratedPosition.push_back(m_Position);
 
-		if (IsPositionReusable(m_IteratedPosition, m_Map, m_Position))
-		{
-			m_AvailableRoutes.push(m_Position);
-		}
-	}
+	//	if (IsPositionReusable(m_IteratedPosition, m_Map, m_Position))
+	//	{
+	//		m_AvailableRoutes.push(m_Position);
+	//	}
+	//}
 
 public:
 	virtual void Move() override;
+	virtual void InitializeCharacter() override;
 };
 
 #endif

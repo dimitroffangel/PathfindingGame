@@ -79,6 +79,11 @@ std::vector<Position> ReadNumberOfObstacledToBeAdded(std::vector<std::string>& m
 	} 
 	while (numberOfPlayerPlacedObstacles < 0 || numberOfPlayerPlacedObstacles >= numberOfPassablePositions - 2);
 
+	if (numberOfPlayerPlacedObstacles == 0)
+	{
+		return std::vector<Position>();
+	}
+
 	std::vector<Position> addedObstaclesPositions;
 	addedObstaclesPositions.reserve(numberOfPassablePositions);
 	Position newObstaclePosition;

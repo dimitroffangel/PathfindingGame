@@ -9,7 +9,7 @@ bool operator==(const Position& a, const Position& b)
 
 bool IsEntityCollidingWithObstacle(const std::vector<std::string>& map, const Position& position)
 {
-	return map[position.x][position.y] == FREE_POSITION_SYMBOL;
+	return map[position.y][position.x] != FREE_POSITION_SYMBOL;
 }
 
 int GetNumberOfPassableObjectsOnMap(const std::vector<std::string>& map)
@@ -32,6 +32,8 @@ int GetNumberOfPassableObjectsOnMap(const std::vector<std::string>& map)
 
 void PrintMap(const std::vector<std::string>& map)
 {
+	std::cout << "---------------------" << "Printing map..." << '\n';
+
 	for (const auto& row : map)
 	{
 		for (const auto& col : row)

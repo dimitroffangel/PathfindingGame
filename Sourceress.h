@@ -19,13 +19,13 @@ public:
 
 	}
 
-	Sourceress(std::vector<std::string>& map)
-		:PlayerCharacter(map)
-	{
-		CalculateTheDistanceToEveryPosition();
-	}
+	//Sourceress(std::vector<std::string>& map)
+	//	:PlayerCharacter(map)
+	//{
+	//}
 
 	virtual void Move() override;
+	virtual void InitializeCharacter() override;
 
 private:
 	std::vector<std::vector<int>> CalculateTheDistanceToEveryPosition();

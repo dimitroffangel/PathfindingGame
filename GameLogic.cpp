@@ -29,8 +29,8 @@ void GameLogic::Loop(std::vector<MapData>& data)
 		auto enemies = GenerateEnemies(map, data[i].numberOfMonsters);
 
 		PrintMap(map);
-
 		m_PlayerCharacter->SetMap(map);
+		m_PlayerCharacter->InitializeCharacter();
 
 		{
 			std::vector<Position> addedObstacles = ReadNumberOfObstacledToBeAdded(map);
@@ -50,19 +50,26 @@ void GameLogic::Loop(std::vector<MapData>& data)
 
 		bool isPlayerCollidingWithEnemies = false;
 
-		while (m_PlayerCharacter->CanMove() || isPlayerCollidingWithEnemies)
+		while (m_PlayerCharacter->CanMove() && !isPlayerCollidingWithEnemies)
 		{
 			MoveEnemies(enemies);
 			m_PlayerCharacter->Move();
-			isPlayerCollidingWithEnemies = isPlayerCollidingWithEnemies;
+			isPlayerCollidingWithEnemies = IsPlayerCollidingWithEnemies(m_PlayerCharacter->GetPosition(), enemies);
 			PrintMap(map);
 		}
 
 		const Position& playerPostion = m_PlayerCharacter->GetPosition();
 
-		if (playerPostion.x != map[0].size() - 1 || playerPostion.y != map.size() - 1 || isPlayerCollidingWithEnemies)
+		if (playerPostion.x == map[0].size() - 1 && playerPostion.y == map.size() - 1)
 		{
-			std::cout << "Game Over..." << '\n';
+			std::cout << "You finished the level..." << '\n';
+			std::cout << "Starting the new one..." << '\n';
+			continue;
+		}
+
+		if (isPlayerCollidingWithEnemies || !m_PlayerCharacter->CanMove())
+		{
+			std::cout << "Enemy collided with your character; Game Over..." << '\n';
 			return;
 		}
 	}
@@ -74,6 +81,7 @@ void GameLogic::Loop(std::vector<MapData>& data)
 void InitializeGame()
 {
 	std::string playerCharacterName;
+	
 	std::vector<MapData> data = ReadMap("./maps.txt");
 	SortContainerOfMaps(data);
 
