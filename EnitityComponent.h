@@ -69,4 +69,6 @@ bool DoesMapHasRouteFromStartToFinish(const std::vector<std::string>& map);
 
 void SortContainerOfMaps(std::vector<MapData>& data);
 
+bool IsMapValid(const MapData& entitiyMap);
+
 #endif

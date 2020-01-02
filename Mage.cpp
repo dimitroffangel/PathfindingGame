@@ -173,8 +173,6 @@ bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std
 
 	const std::vector<std::string>& map = *pointerToMap;
 
-	int counterOfRoadsFromPosition = 0;
-	
 	if (positionToCheck.y - 1 >= 0 && map[positionToCheck.y - 1][positionToCheck.x] == FREE_POSITION_SYMBOL)
 	{
 		Position newPosition = positionToCheck;
@@ -182,7 +180,7 @@ bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std
 
 		if (std::find(blockedPositions.begin(), blockedPositions.end(), newPosition) == blockedPositions.end())
 		{
-			counterOfRoadsFromPosition++;
+			return true;
 		}
 	}
 
@@ -193,8 +191,7 @@ bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std
 
 		if (std::find(blockedPositions.begin(), blockedPositions.end(), newPosition) == blockedPositions.end())
 		{
-			counterOfRoadsFromPosition++;
-
+			return true;
 		}
 	}
 
@@ -205,8 +202,7 @@ bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std
 
 		if (std::find(blockedPositions.begin(), blockedPositions.end(), newPosition) == blockedPositions.end())
 		{
-			counterOfRoadsFromPosition++;
-
+			return true;
 		}
 	}
 
@@ -217,13 +213,9 @@ bool IsPositionReusable(const std::vector<Position>& blockedPositions, const std
 
 		if (std::find(blockedPositions.begin(), blockedPositions.end(), newPosition) == blockedPositions.end())
 		{
-			counterOfRoadsFromPosition++;
-
+			return true;
 		}
 	}
-
-	if (counterOfRoadsFromPosition > 0)
-		return true;
 
 	return false;
 }
