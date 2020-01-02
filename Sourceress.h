@@ -14,16 +14,6 @@ private:
 	std::stack<Position> m_ShortestWay;
 
 public:
-	Sourceress()
-	{
-
-	}
-
-	//Sourceress(std::vector<std::string>& map)
-	//	:PlayerCharacter(map)
-	//{
-	//}
-
 	virtual void Move() override;
 	virtual void InitializeCharacter() override;
 
