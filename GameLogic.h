@@ -13,12 +13,13 @@ private:
 	std::unique_ptr<PlayerCharacter> m_PlayerCharacter;
 
 public:
-	GameLogic(const std::string& playerChoice, std::vector<MapData>& data);
+	GameLogic(const std::string& playerChoice);
 
 	void Loop(std::vector<MapData>& data);
 };
 
 void InitializeGame();
+void TestGame();
 
 #endif
 

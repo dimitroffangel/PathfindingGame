@@ -24,6 +24,7 @@
 
 const char OBSTACLE_SYMBOL = '#';
 const char PLAYER_OBSTACLE_SYMBOL = 'T';
+const char PLAYER_SYMBOL = 'P';
 const char FREE_POSITION_SYMBOL = '.';
 const char ENEMY_SYMBOL = 'E';
 

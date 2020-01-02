@@ -6,8 +6,15 @@
 
 void Sourceress::Move()
 {
+	std::vector<std::string>& map = *m_Map;
+
+	if(map[m_Position.y][m_Position.x] == PLAYER_SYMBOL)
+		map[m_Position.y][m_Position.x] = FREE_POSITION_SYMBOL;
+
 	m_Position = m_ShortestWay.top();
 	m_ShortestWay.pop();
+
+	map[m_Position.y][m_Position.x] = PLAYER_SYMBOL;
 
 	if (m_ShortestWay.size() == 0)
 	{
@@ -146,8 +153,6 @@ std::vector<std::vector<int> > Sourceress::CalculateTheDistanceToEveryPosition()
 		//std::cout << "( " << finalDestination.x << " ; " << finalDestination.y << ")" << " -> ";
 		finalDestination = reachedFrom[finalDestination.y][finalDestination.x];
 	}
-
-	m_ShortestWay.push(m_Position);
 
 	return distanceForEveryReachablePosition;
 }

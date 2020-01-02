@@ -12,7 +12,8 @@ void Mage::Move()
 	const Direction currentDirection = m_Direction;
 	Position newPosition = m_Position;
 
-	map[m_Position.y][m_Position.x] = FREE_POSITION_SYMBOL;
+	if(map[m_Position.y][m_Position.x] == PLAYER_SYMBOL)
+		map[m_Position.y][m_Position.x] = FREE_POSITION_SYMBOL;
 	
 	if ((m_Direction == directionUp || m_IsTeleportingBack) && m_Position.y - 1 >= 0 && map[m_Position.y - 1][m_Position.x] == FREE_POSITION_SYMBOL)
 	{
@@ -102,7 +103,7 @@ void Mage::Move()
 
 	if (m_Position.x == map[0].size() - 1 && m_Position.y == map.size() - 1)
 	{
-		map[m_Position.y][m_Position.x] = 'P';
+		map[m_Position.y][m_Position.x] = PLAYER_SYMBOL;
 		std::cout << "I made it... " << '\n';
 		m_CanMove = false;
 		return;
@@ -110,7 +111,7 @@ void Mage::Move()
 
 	if (hasMoved)
 	{
-		map[m_Position.y][m_Position.x] = 'P';
+		map[m_Position.y][m_Position.x] = PLAYER_SYMBOL;
 		m_IteratedPosition.push_back(m_Position);
 
 		if (IsPositionReusable(m_IteratedPosition, m_Map, m_Position))

@@ -3,10 +3,8 @@
 #include "InputComponent.h"
 #include "Sourceress.h"
 
-GameLogic::GameLogic(const std::string& playerChoice, std::vector<MapData>& data)
+GameLogic::GameLogic(const std::string& playerChoice)
 {
-	std::vector<std::string>& map = data[0].map;
-
 	if (playerChoice == "mage")
 	{
 		m_PlayerCharacter = std::make_unique<Mage>();
@@ -87,7 +85,7 @@ void InitializeGame()
 
 	ReadPlayerChoiceOFClass(playerCharacterName);
 
-	GameLogic gameLogic = GameLogic(playerCharacterName, data);
+	GameLogic gameLogic = GameLogic(playerCharacterName);
 	gameLogic.Loop(data);
 
 	std::cout << "if you want to play again press y";
@@ -101,4 +99,92 @@ void InitializeGame()
 	}
 
 	std::cout << "Thanks for playing..." << '\n';
+}
+
+void TestGame()
+{
+	std::string playerCharacterName = "sourceress";
+
+	std::ifstream readingFromFile("./UnitTests.txt");
+	
+	int numberOfRows, numberOfCols;
+
+	readingFromFile >> numberOfRows;
+	readingFromFile >> numberOfCols;
+	
+	if (numberOfRows <= 0 || numberOfCols <= 0)
+	{
+		std::cout << "ReadMap():: Input has invalid arguments..." << '\n';
+		return;
+	}
+
+	MapData mapData;
+
+	// read the map
+	mapData.map = vectorOfStrings(numberOfRows);
+	std::string currentRow;
+
+	for (size_t i = 0; i < numberOfRows; i++)
+	{
+		readingFromFile >> currentRow;
+		mapData.map[i] = currentRow;
+	}
+
+	// read the number of monsters
+	readingFromFile >> mapData.numberOfMonsters;
+
+
+	// check is the map valid
+	if (!IsMapValid(mapData))
+	{
+		std::cout << "Map was not valid...";
+		return;
+	}
+
+	std::vector<Enemy> enemies;
+	enemies.reserve(mapData.numberOfMonsters);
+
+	for (size_t i = 0; i < mapData.numberOfMonsters; i++)
+	{
+		Position enemyPosition;
+		readingFromFile >> enemyPosition.x;
+		readingFromFile >> enemyPosition.y;
+
+		enemies.push_back(Enemy(enemyPosition, &mapData.map));
+	}
+
+	GameLogic logic = GameLogic(playerCharacterName);
+
+	PrintMap(mapData.map);
+	
+	std::unique_ptr<PlayerCharacter> m_PlayerCharacter;
+
+	if (playerCharacterName == "mage")
+	{
+		m_PlayerCharacter = std::make_unique<Mage>();
+	}
+
+	else if (playerCharacterName == "sourceress")
+	{
+		m_PlayerCharacter = std::make_unique<Sourceress>();
+	}
+
+	m_PlayerCharacter->SetMap(mapData.map);
+	m_PlayerCharacter->InitializeCharacter();
+
+	bool isPlayerColliding = false;
+	int turn = 0;
+
+	while (m_PlayerCharacter->CanMove() && !isPlayerColliding)
+	{
+		MoveEnemies(enemies);
+		turn++;
+		std::cout << "Turn " << turn << " | " << "moving enemies first";
+		PrintMap(mapData.map);
+		m_PlayerCharacter->Move();
+		isPlayerColliding = IsPlayerCollidingWithEnemies(m_PlayerCharacter->GetPosition(), enemies);
+		PrintMap(mapData.map);
+	}
+
+	std::cout << "if you want to play again press y";
 }
