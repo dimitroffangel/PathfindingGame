@@ -51,31 +51,6 @@ std::vector<MapData> ReadMap(const std::string& fileName)
 	return data;
 }
 
-bool IsMapValid(const MapData& entitiyMap)
-{
-	const size_t numberOfRows = entitiyMap.map.size();
-	const size_t numberOfCols = entitiyMap.map[0].size();
-	const size_t numberOFFreePositions = GetNumberOfPassableObjectsOnMap(entitiyMap.map);
-
-	if (entitiyMap.numberOfMonsters > 0 && entitiyMap.numberOfMonsters >= numberOFFreePositions - 1)
-	{
-		return false;
-	}
-
-	if (entitiyMap.map[0][0] != FREE_POSITION_SYMBOL || entitiyMap.map[numberOfRows - 1][numberOfCols - 1] != FREE_POSITION_SYMBOL)
-	{
-		return false;
-	}
-
-	if (!IsMapWithValidSymbols(entitiyMap.map) || !DoesMapHasRouteFromStartToFinish(entitiyMap.map))
-	{
-		return false;
-	}
-
-	return true;
-}
-
-
 std::vector<Position> ReadNumberOfObstacledToBeAdded(std::vector<std::string>& map)
 {
 	
