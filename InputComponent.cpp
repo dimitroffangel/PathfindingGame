@@ -15,14 +15,14 @@ std::vector<MapData> ReadMap(const std::string& fileName)
 
 	while (readingFromFile >> numberOfRows && readingFromFile >> numberOfCols)
 	{
-		if (numberOfRows < 0 || numberOfCols < 0)
+		if (numberOfRows == 0 && numberOfCols == 0)
 		{
-			std::cout << "ReadMap():: Input has invalid arguments..." << '\n';
 			continue;
 		}
 
-		if (numberOfRows == 0 && numberOfCols == 0)
+		if (numberOfRows <= 0 || numberOfCols <= 0)
 		{
+			std::cout << "ReadMap():: Input has invalid arguments..." << '\n';
 			continue;
 		}
 

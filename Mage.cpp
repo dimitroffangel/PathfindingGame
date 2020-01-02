@@ -57,7 +57,7 @@ void Mage::Move()
 		}
 	}
 
-	if (!hasMoved && (m_Direction == directionDown || m_IsTeleportingBack )&&  m_Position.y + 1 < map[0].size() && map[m_Position.y + 1][m_Position.x] == FREE_POSITION_SYMBOL)
+	if (!hasMoved && (m_Direction == directionDown || m_IsTeleportingBack )&&  m_Position.y + 1 < map.size() && map[m_Position.y + 1][m_Position.x] == FREE_POSITION_SYMBOL)
 	{
 		newPosition.y++;
 		hasMoved = true;
